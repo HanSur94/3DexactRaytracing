@@ -1,0 +1,32 @@
+function [tca, raySlope] = computeTCA(system, rays, distances, medias,...
+                            wavelengths, varargin)
+%COMPUTETCA will compute the transversal chromatic aberration of the
+%system. It will use the TSA function and compute the TSA for multiple
+%wavelengths.
+%
+%  [tca] = computeTCA(system, rays, distances, medias, wavelengths, varargin)
+
+
+
+
+    % convert system matrials to arry of refrective indices
+    ns = medias2refractiveIndices(medias, wavelengths)
+    
+        size(ns)
+    size(distances)
+
+    % create tca matrix
+    tca = zeros(size(rays,1),size(wavelengths,2));
+    ray
+    
+    % for each wavelength, compute the tsa of the rays
+    for iWavelength = 1:1:size(wavelengths,2)
+        
+        [tsa,] = computeTSA(system, rays, distances, ns(iWavelength,:))
+        tca(:,iWavelength) = tsa
+        
+    end
+
+
+end
+

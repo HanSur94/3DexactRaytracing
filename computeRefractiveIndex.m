@@ -3,7 +3,10 @@ function [refractiveIndex] = computeRefractiveIndex(glass, wavelength)
 %according to a special wavelength of multiple wavelength. The wavelength
 %will be computed with the sellmeier formula. The seidel-coefficients will
 %be used from the glass class.
+%
+%   [refractiveIndex] = computeRefractiveIndex(glass, wavelength)
 
+    % test input
     if ~isa(glass, 'Glass')
         error('computeRefractiveIndex:InputDataType',...
             'glass must be a class object of type "Glass".')
@@ -24,6 +27,7 @@ function [refractiveIndex] = computeRefractiveIndex(glass, wavelength)
             'wavelength must be real.')
     end
 
+    % compute refraction
     refractiveIndex = sqrt(1+...
         (glass.sellmeier(1,1) * (wavelength * 1e6).^2)./...
             ((wavelength * 1e6).^2 - glass.sellmeier(1,4))+...

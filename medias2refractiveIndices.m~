@@ -1,0 +1,26 @@
+function [ns] = medias2refractiveIndices(medias, wavelength)
+%MATERIALS2REFRACTIVEINDICES will convert a cell array of optical medias
+%of a optical system according to the given wavelength into a row vector
+%containing the refractive indicies for the given wavelength. The medias
+%can contain pure numbers, gasses or glasses.
+%
+%   [ns] = medias2refractiveIndices(medias, wavelength)
+
+    ns = zeros(size(medias,2));
+
+    for iMedia = 1:1:size(medias,2)
+        
+        if isa(medias{1,iMedia}, 'Glass')
+            
+            ns(1,iMedia) = computeRefractiveIndex(medias{1,iMedia},w)
+            
+        elseif isnumeric(medias{1,iMedia})
+            
+            
+        else
+            
+        end
+    end
+
+end
+
