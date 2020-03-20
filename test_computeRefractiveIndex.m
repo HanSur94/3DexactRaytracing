@@ -7,6 +7,8 @@ function test_computeRefractiveIndex_BK7(testCase)
     wavelength_d = 587.6e-9;
     wavelength_e = 546.07e-9;
     
+    wavelengths = 380:1:780*1e-9;
+    
     load glassDB.mat;
     
     results = searchGlassDB('BK7','GlassType',glassDB);
@@ -14,8 +16,13 @@ function test_computeRefractiveIndex_BK7(testCase)
     
     nd = computeRefractiveIndex(P_BK7,wavelength_d);
     ne = computeRefractiveIndex(P_BK7,wavelength_e);
+    ns = computeRefractiveIndex(P_BK7,wavelengths);
     
     verifyEqual(testCase, [nd, ne], [P_BK7.nd, P_BK7.ne], 'RelTol', 0.0001);
+    
+    verifyEqual(testCase, [nd, ne], [P_BK7.nd, P_BK7.ne], 'RelTol', 0.0001);
+    
+    verifyEqual(testCase, isrow(ns), true);
 
 end
 
