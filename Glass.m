@@ -3,6 +3,9 @@ classdef Glass
     %
     %   Glass(type,manufracturer,abbeGrouping,...
     %                nd,ne,vd,ve,sellmeier)
+    %
+    % 
+    %   GlassFromDB(searchTableSingleRow)
     
     properties
         type
