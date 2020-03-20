@@ -27,28 +27,13 @@ LaCroixGlassData = readtable("/Users/hannessuhr/Documents/MATLAB/exactRaytracing
 
 
 %% Clear temporary variables
-clear all;
-load glassDB.mat
+clear opts
+glassTypes = LaCroixGlassData.('GlassType')
+output = strfind(glassTypes,'BK7','ForceCellOutput',true)
 
-A = searchGlassDB("a","GlassType", glassDB);
-BK7 = Glass.GlassFromDB(A(1,:))
-
-
-% glassTypes = LaCroixGlassData.('GlassType')
-% 
-% output = strfind(glassTypes,'BK','ForceCellOutput',true)
-% 
-% indices = []
-% 
-% for iOutput = 1:1:length(output)
-%     if ~isempty(output{iOutput,1})
-%         indices = [indices, iOutput]
-%     end
-% end
-% 
-% indices(indices>0)
-% 
-% searchResult = LaCroixGlassData(indices,:)
+for iOutput = 1:1:length(output)
+    output{iOutput,1} == 
+end
 
 % output2 = cell2mat(output)
 % output(output > 0)

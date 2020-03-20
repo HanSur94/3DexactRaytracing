@@ -24,14 +24,7 @@ classdef Glass
             %                nd,ne,vd,ve,sellmeier)
             
             % check that sellmeier is a row vector with length of 6
-            if iscolumn(sellmeier)
-                error('Glass:InputDataSize',...
-                    'sellmeier must be a row vector.')
-            end
-            
-            if length(sellmeier) ~= 6
-                error('Glass:InputDataSize',...
-                    'sellmeier must have length of 6.')
+            if iscolumn(sellmeier) 
             end
             
             obj.type = type;
@@ -52,8 +45,9 @@ classdef Glass
             %   GlassFromDB(searchTableSingleRow)
             
             % height of input table must be 1
-            if height(tableSingleRow) ~= 1
-                error('GlassFromDB:InputDataSize',...
+            if height(tableSingleRow) > 1 ||...
+                    height(tableSingleRow) == 0
+                error('GlassFromDB:DataInputSize',...
                     'tableSingleRow must have a height of 1.')
             end
             
