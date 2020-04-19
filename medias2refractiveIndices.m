@@ -8,17 +8,11 @@ function [ns] = medias2refractiveIndices(medias, wavelengths)
 %
 %   [ns] = medias2refractiveIndices(medias, wavelength)
 
-    if ~isrow(wavelengths)
-        error('medias2refractiveIndices:InputDataSize',...
-        'wavelength must be a scalar or a row vector.');
-        
+    arguments
+        medias (1,:) cell {mustBeCellWithNumericOrGlass}
+        wavelengths (1,:) double {mustBeNumeric,... 
+                                  mustBeGreaterThan(wavelengths,0) }
     end
-    
-    if ~isrow(medias)
-        error('medias2refractiveIndices:InputDataSize',...
-        'medias must be a scalar or a row vector.');
-    end
-    
 
     ns = zeros(size(wavelengths,2),size(medias,2));
 
@@ -40,5 +34,17 @@ function [ns] = medias2refractiveIndices(medias, wavelengths)
         end
     end
 
+end
+
+
+function mustBeCellWithNumericOrGlass(cellArray)
+    for iCell = 1:1:length(cellArray)
+        if ~isnumeric(cellArray{iCell})
+            if ~isa(cellArray{iCell},'Glass')
+                error('medias2refractiveIndices:InputType',...
+                'One of the cells dont contains Numeric or Glass object.');
+            end
+        end
+    end
 end
 

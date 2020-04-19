@@ -1,4 +1,4 @@
-function [tsa, raySlope] = computeTSA(system, rays, distances, ns,...
+function [tsa, raysInHeight] = computeTSA(system, rays, distances, ns,...
                                     varargin)
 %COMPUTETSA3D will compute the transversal spherical aberration of the
 %system.
@@ -27,25 +27,26 @@ function [tsa, raySlope] = computeTSA(system, rays, distances, ns,...
     raysOut = raytraceSystem3D(rays, system, ns, distances);
     
     tsa = zeros(size(raysOut,1),1);
-    raySlope = tsa;
+    raysInHeight = tsa;
     for iRay = 1:1:size(raysOut,1)
         % get origin points of the last rays
         tsa(iRay,1) = raysOut{iRay,end}.origin(2);
         
         % get the height of the rays in the entrance pupil? ray slope?
-        raySlope(iRay,1) = raysOut{iRay,end}.direction(2)/...
-                    raysOut{iRay,end}.direction(3);
+        %raySlope(iRay,1) = raysOut{iRay,end}.direction(2)/...
+        %            raysOut{iRay,end}.direction(3);
+        raysInHeight(iRay,1) = rays{iRay,1}.origin(2);
     end
     
     if nargin >= 5
         if isequal(varargin{1,1},'plot')
             % plot the data
             % take vargin{1,2:end} for plot formatting
-            plot(raySlope, tsa, varargin{1,2:end});
+            plot(raysInHeight, tsa, varargin{1,2:end});
             grid on;
             grid minor;
-            xlabel('Ray slope tan(u) in [rad]');
-            ylabel('Transvers sph. aberration TSA in [m]');
+            xlabel('Input Ray Height p_{y} in [m]');
+            ylabel('Transvers sph. aberration e_{y} in [m]');
             title('Transverse Spherical Aberration - TSA');
         else
             % otherwise, give error of wrong mode
